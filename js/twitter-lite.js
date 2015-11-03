@@ -3,7 +3,7 @@
 // ==========================================
 
 /*
- * Rathering than actually performing a network request, we'll just store some
+ * Rather than actually performing a network request, we'll just store some
  * sample data in a tweets.json file. This simplifies development so we can
  * easily play around with different data and not rely on complicated
  * authentication mechanisms with actual servers.

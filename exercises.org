@@ -1,0 +1,83 @@
+#+TITLE: Exercises
+
+* HTML Generation
+
+** Exercise 1: Basic Element Abstraction
+
+Consider the following functions:
+
+#+begin_src javascript
+function li(content) {
+    return "<li>" + content + "</li>";
+}
+
+function p(content) {
+    return "<p>" + content +"</p>";
+}
+#+end_src
+
+Both functions are really similar! They take one argument and turn that argument
+into an HTML string by wrapping it in an opening and closing tag.
+
+Abstract these functions further by defining a higher-order function
+=basicElement= that accepts a tag as input and returns a new function
+that accepts content and returns the actual HTML element (a string)?
+
+#+begin_src javascript
+function basicElement(tag) {
+  // ...
+}
+
+// use it like this:
+var li = basicElement("li"); // basicElement returns a function
+li("This is the content."); // => "<li>This is the content.</li>"
+#+end_src
+
+** Exercise 2: Extended Element Abstraction
+
+If the argument to =basicElement= is just content, we cannot define actual HTML
+elements because we cannot define its attributes (e.g. =id=, =class=,
+=style=, =value=, etc.). Let's look at some sample HTML elements pulled from
+Twitter:
+
+#+begin_src html
+<div role="main" aria-labelledby="content-main-heading" class="content-main top-timeline-tweetbox" id="timeline">Stuff</div>
+<form class="t1-form form-search js-search-form" action="/search" id="global-nav-search">Inputs and stuff</form>
+#+end_src
+
+There are lots of arbitarily defined parameters that would need to go into our
+function in order to be able to represent a proper HTML elment -- objects are a
+perfect fit for this. 
+#+begin_src json
+{"id": "timeline", "role": "main", "aria-labelledby": "content-main-heading", "class": "content-main top-timeline-tweetbox" }
+{"class": "t1-form form-search js-search-form", "action": "/search", etc. }
+#+end_src
+
+If we represent the attributes of the element as an object, we just need a way
+to pull them out of the object and turn them into an element. Write a function
+=element= that accepts one argument as before (the tag), and returns a function
+that accepts an attributes *object* and *content*, and outputs HTML.
+
+#+begin_src javascript
+function element(tag) {
+    // ...
+}
+var div = element("div");
+var attrs = { "id": "myDiv", "class": "col-lg-3 highlight", "role": "main"};
+div(attrs, "Some content"); // => <div id="myDiv" class="col-lg-3 highlight" role="main">Some content</div>
+#+end_src
+
+** Exercise 3: Support all types of tags
+
+Not all elements can contain content (additional HTML elements) -- =input= and
+=img= are examples of this. These elements do not have closing tags.
+
+Extend the =element= function's returned function so that if no content is
+passed, no ending tag is specified.
+
+#+begin_src javascript
+var input = element("input");
+var attrs = { action: "/search", type: "text" }
+input(attrs); // => <input type="text" action="search">
+#+end_src
+
