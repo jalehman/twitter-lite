@@ -17,4 +17,4 @@ for `index.html` by default).
 
 See this
 [blog post](http://www.pythonforbeginners.com/modules-in-python/how-to-use-simplehttpserver/)
-for more info.
+for more info about using `SimpleHTTPServer`.

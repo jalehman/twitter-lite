@@ -40,7 +40,7 @@ function p(content) {
 // ==========================================
 
 function tweetContent(tweet) {
-    return tweet.body;
+    return tweet.text;
 }
 
 function loadTweets(cb) {
@@ -59,6 +59,7 @@ $("input#load-tweets-btn").click(function(e) {
     var button = $( e.target );
     button.prop("value", "Loading...");
     loadTweets(function(tweets) {
+        console.log(tweets);
         button.prop("value", "Refresh Tweets");
         var render = compose(p, tweetContent);
         $("ul#tweets").html(_.map(tweets, render));
