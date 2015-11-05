@@ -55,13 +55,28 @@ function loadTweets(cb) {
 // DOM Manipulation
 // ==========================================
 
+var renderTweet = compose(li, tweetContent);
+
+function prependTweet(tweet) {
+    $("ul#tweets").prepend(renderTweet(tweet));
+}
+
+function postTweetHandler(e) {
+    var tweetText = $("#tweet-text").val();
+    var tweet = {text: tweetText};
+    prependTweet(tweet);
+    $("#tweet-text").val("");
+}
+
+$("#tweet-btn").click(postTweet);
+
+
 $("input#load-tweets-btn").click(function(e) {
     var button = $( e.target );
     button.prop("value", "Loading...");
     loadTweets(function(tweets) {
         console.log(tweets);
         button.prop("value", "Refresh Tweets");
-        var render = compose(p, tweetContent);
-        $("ul#tweets").html(_.map(tweets, render));
+        $("ul#tweets").html(_.map(tweets, renderTweet));
     });
 });

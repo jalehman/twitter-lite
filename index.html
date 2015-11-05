@@ -5,9 +5,13 @@
         <title>Twitter Lite</title>
     </head>
     <body>
+        <form>
+            <input id="tweet-text" type="text">
+            <input id="tweet-btn" type="button" value="Tweet">
+        </form>
+        <br>
         <input type='button' value='Load Tweets' id='load-tweets-btn'>
-        <ul id="tweets">
-        </ul>
+        <ul id="tweets"></ul>
     </body>
     <!-- The JS that we'll require. Make sure jQuery is loaded before any user-defined code. -->
     <script type="text/javascript" src="js/lib/jquery.js"></script>
